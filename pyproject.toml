@@ -1,0 +1,22 @@
+[tool.taskipy.tasks]
+pre_test = "task lint && task format"
+test = "python -m pytest -x -vv --cov=src"
+post_test = "coverage html"
+lint = "ruff . && blue . --check --diff"
+format = "blue . && isort ."
+mypy = "mypy . --config-file pyproject.toml"
+
+[tool.pytest.ini_options]
+# pythonpath = "src"
+
+[tool.isort]
+profile = "black"
+line_length = 79
+
+[tool.ruff]
+line-length = 79
+
+[tool.mypy]
+ignore_missing_imports = true
+mypy_path = "."
+exclude = ["venv", ".venv"]
